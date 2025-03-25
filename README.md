@@ -2,9 +2,15 @@
 
 ## 食用方式：
 
-### 注册一个GLaDOS的账号([注册地址](https://glados.space/landing/4CJN6-65T8Q-DNJRM-NXEA6))
+邀请的方式：
 
-#### 我的邀请码：4CJN6-65T8Q-DNJRM-NXEA6
+1. 直接注册GLaDOS(注册地址在 https://github.com/glados-network/GLaDOS 实时更新)
+
+成功后输入邀请码:M8WGU-E9AK5-ZSIL4-IN9J8 激活
+
+2. 通过 https://glados.space/landing/M8WGU-E9AK5-ZSIL4-IN9J8 注册, 自动填写激活
+
+3. 通过 https://m8wgu-e9ak5-zsil4-in9j8.glados.space , 自动填写激活
 
 ### **Fork**本仓库
 
