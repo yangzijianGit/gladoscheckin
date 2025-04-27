@@ -39,7 +39,8 @@ jobs:
         PUSHPLUS: ${{ secrets.PUSHPLUS }}
         COOKIES: ${{ secrets.COOKIES }}
 
-    #- name: keep alive
+    - name: keep alive
+      uses: HcTech2025/keepalive-workflow@master
     #  uses: gautamkrishnar/keep-alive-workflow@v2 # using the workflow with default settings
     - name: Delete workflow runs
       uses: Mattraks/delete-workflow-runs@v2
