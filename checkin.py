@@ -45,6 +45,13 @@ if __name__ == '__main__':
 
             # 获取账号当前状态
             result = state.json()
+            # 测试打印日志
+            # 将签到结果转换为格式化的 JSON 字符串
+            result_json = json.dumps(result, indent=4)
+        
+            print("Printing check-in result:")
+            print(result_json)
+            
             # 获取剩余时间
             leftdays = int(float(result['data']['leftDays']))
             # 获取账号email
