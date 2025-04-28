@@ -49,8 +49,8 @@ if __name__ == '__main__':
             # 将签到结果转换为格式化的 JSON 字符串
             result_json = json.dumps(result, ensure_ascii=False, indent=4)
         
-            print("Printing check-in result:")
-            print(result_json)
+            # print("Printing check-in result:")
+            # print(result_json)
             
             # 获取剩余时间
             leftdays = int(float(result['data']['leftDays']))
