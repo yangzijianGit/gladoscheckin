@@ -56,7 +56,7 @@ if __name__ == '__main__':
             leftdays = int(float(result['data']['leftDays']))
             # 获取账号email
             # email = result['data']['email']
-            email = 'XX@XX.XX
+            email = 'XX@XX.XX'
 
             #匹配返回的msg
             pattern = r'Checkin! Got (\d+) Points'
