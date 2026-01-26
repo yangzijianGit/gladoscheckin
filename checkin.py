@@ -2,6 +2,7 @@ import requests
 import json
 import os
 import re
+
 # -------------------------------------------------------------------------------------------
 # github workflows
 # -------------------------------------------------------------------------------------------
@@ -11,7 +12,7 @@ if __name__ == '__main__':
 
     # 推送内容
     title = "Glados"
-    success, fail = 0, 0        # 成功账号数量 失败账号数量
+    success, fail = 0, 0  # 成功账号数量 失败账号数量
     sendContent = ""
 
     # glados账号cookie 直接使用数组 如果使用环境变量需要字符串分割一下
@@ -21,32 +22,26 @@ if __name__ == '__main__':
         cookies = []
         exit(0)
 
-    # url = "https://glados.rocks/api/user/checkin"
-    # url2 = "https://glados.rocks/api/user/status"
-    
-    url = "https://glados.cloud/api/user/checkin"
-    url2 = "https://glados.cloud/api/user/status"
+    checkin_url = "https://glados.cloud/api/user/checkin"
+    status_url = "https://glados.cloud/api/user/status"
 
-    # referer = 'https://glados.rocks/console/checkin'
-    # origin = "https://glados.rocks"
-    
     referer = 'https://glados.cloud/console/checkin'
     origin = "https://glados.cloud/"
 
     useragent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36"
     payload = {
-        'token': 'glados.one'
+        'token': 'glados.cloud'
     }
 
     for cookie in cookies:
-        checkin = requests.post(url, headers={'cookie': cookie, 'referer': referer, 'origin': origin,
-                                'user-agent': useragent, 'content-type': 'application/json;charset=UTF-8'}, data=json.dumps(payload))
-        state = requests.get(url2, headers={
-                             'cookie': cookie, 'referer': referer, 'origin': origin, 'user-agent': useragent})
-    # --------------------------------------------------------------------------------------------------------#
+        checkin = requests.post(checkin_url, headers={'cookie': cookie, 'referer': referer, 'origin': origin,
+                                              'user-agent': useragent, 'content-type': 'application/json;charset=UTF-8'}, data=json.dumps(payload))
+        state = requests.get(status_url, headers={
+            'cookie': cookie, 'referer': referer, 'origin': origin, 'user-agent': useragent})
+        # --------------------------------------------------------------------------------------------------------#
         if checkin.status_code == 200:
             # 解析返回的json数据
-            result = checkin.json()     
+            result = checkin.json()
             # 获取签到结果
             status = result.get('message')
 
@@ -55,17 +50,17 @@ if __name__ == '__main__':
             # 测试打印日志
             # 将签到结果转换为格式化的 JSON 字符串
             result_json = json.dumps(result, ensure_ascii=False, indent=4)
-        
+
             # print("Printing check-in result:")
             # print(result_json)
-            
+
             # 获取剩余时间
             leftdays = int(float(result['data']['leftDays']))
             # 获取账号email
             # email = result['data']['email']
             email = 'XX@XX.XX'
 
-            #匹配返回的msg
+            # 匹配返回的msg
             pattern = r'Checkin! Got (\d+) Points'
             match = re.match(pattern, status)
 
@@ -89,15 +84,15 @@ if __name__ == '__main__':
             message_days = "获取信息失败"
 
         # 推送内容
-        sendContent += f"{'-'*30}\n\
+        sendContent += f"{'-' * 30}\n\
             账号: {email}\n\
             签到情况: {message_status}\n\
             剩余天数: {message_days}\n"
-        
+
         if cookie == cookies[-1]:
             sendContent += '-' * 30
-        
-     # --------------------------------------------------------------------------------------------------------#
+
+    # --------------------------------------------------------------------------------------------------------#
     print("sendContent:" + "\n", sendContent)
     if sckey != "":
         title += f': 成功{success},失败{fail}'
